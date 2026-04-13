@@ -119,7 +119,7 @@ export function BarChartRace({ frames }: Props) {
       .attr('x', d => x(d))
       .attr('y', 0)
       .attr('text-anchor', 'middle')
-      .attr('fill', 'rgba(180,180,190,0.65)')
+      .attr('fill', 'rgba(180,180,190,0.55)')
       .style('font-family', 'var(--font-mono)')
       .style('font-size', '9px')
       .style('letter-spacing', '0.04em')
@@ -135,9 +135,9 @@ export function BarChartRace({ frames }: Props) {
           .attr('x1', '0%').attr('y1', '0%')
           .attr('x2', '100%').attr('y2', '0%')
         grad.append('stop').attr('offset', '0%')
-          .attr('stop-color', hex).attr('stop-opacity', '0.92')
+          .attr('stop-color', hex).attr('stop-opacity', '0.95')
         grad.append('stop').attr('offset', '70%')
-          .attr('stop-color', hex).attr('stop-opacity', '0.78')
+          .attr('stop-color', hex).attr('stop-opacity', '0.81')
         grad.append('stop').attr('offset', '100%')
           .attr('stop-color', hex).attr('stop-opacity', '0.52')
       }
@@ -234,16 +234,16 @@ export function BarChartRace({ frames }: Props) {
 
     all.select<SVGRectElement>('rect.bar-glow')
       .transition().duration(ANIMATION_DURATION).ease(d3.easeQuadInOut)
-      .attr('width', d => Math.max(4, x(d.cumulative)))
+      .attr('width', d => Math.max(0, x(d.cumulative)))
 
     all.select<SVGRectElement>('rect.bar-rect')
       .transition().duration(ANIMATION_DURATION).ease(d3.easeQuadInOut)
-      .attr('width', d => Math.max(4, x(d.cumulative)))
+      .attr('width', d => Math.max(0, x(d.cumulative)))
       .attr('fill', d => `url(#bar-grad-${d.country.replace(/\s/g, '')})`)
 
     all.select<SVGRectElement>('rect.bar-edge')
       .transition().duration(ANIMATION_DURATION).ease(d3.easeQuadInOut)
-      .attr('x', d => Math.max(2, x(d.cumulative) - 2))
+      .attr('x', d => Math.max(0, x(d.cumulative) - 2))
       .attr('fill', d => COUNTRY_HEX[d.country])
 
     all.select<SVGGElement>('g.bar-ticks')
