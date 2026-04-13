@@ -1,0 +1,78 @@
+.footer {
+  border-top: 1px solid var(--color-border-subtle);
+  margin-top: var(--space-16);
+  padding: var(--space-6) 0;
+}
+
+.inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* Apogee logo combo */
+.apogeeLink {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  text-decoration: none;
+  transition: opacity var(--duration-fast);
+  opacity: 0.8;
+}
+.apogeeLink:hover { opacity: 1; }
+
+.apogeeName {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f59e0b;
+}
+
+.apogeeArrow {
+  font-size: 11px;
+  color: #f59e0b;
+  opacity: 0.5;
+}
+
+/* Right side */
+.right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.copy {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  letter-spacing: 0.06em;
+}
+
+.sep {
+  width: 1px;
+  height: 12px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+  letter-spacing: 0.06em;
+  transition: color var(--duration-fast);
+}
+.link:hover { color: var(--color-text-secondary); }
+
+@media (max-width: 640px) {
+  .inner { flex-direction: column; align-items: flex-start; gap: var(--space-3); padding: 0 var(--space-4); }
+  .right { gap: var(--space-3); }
+}

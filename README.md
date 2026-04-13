@@ -1,73 +1,102 @@
-# React + TypeScript + Vite
+# Launch Atlas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Global satellite launch cadence by country, 2000–2025.**  
+Reusable rockets, new entrants, China's rise. A data visualization project by [Apogee](https://apogee-review.vercel.app).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+| Layer | Choice |
+|---|---|
+| Build | Vite 5 |
+| Framework | React 18 + TypeScript |
+| Visualization | D3.js v7 |
+| Styling | CSS Modules + IBM Plex design tokens |
+| Routing | React Router v6 |
+| Data | Launch Library 2 API (The Space Devs) |
+| Deployment | Vercel |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Pages
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### `/` — Bar Chart Race
+Animated cumulative launch count race across 8 country/provider buckets, 2000–2025.  
+- Auto-play with scrubable timeline
+- Smooth D3 rank transitions
+- Story beat annotations
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### `/detail` — Annual Line Chart
+Per-year launch counts with full interactivity:
+- Country toggle buttons
+- Year range filter (dual-handle)
+- Hover tooltip
+- Summary stats + breakdown table
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Data
+
+Data is fetched at runtime from [Launch Library 2](https://ll.thespacedevs.com/2.2.0/) — a free, community-maintained launch database. Results are session-cached for 24 hours to respect rate limits.
+
+If the API is unavailable, the app falls back to a curated static dataset covering all 8 entities × 2000–2025.
+
+### Country buckets
+
+| Bucket | Includes |
+|---|---|
+| **SpaceX** | SpaceX (separated to highlight the reuse revolution) |
+| **USA** | ULA, Northrop Grumman, Rocket Lab (US), other US providers |
+| **Russia** | Roscosmos, Soviet legacy records, Baikonur-attributed launches |
+| **China** | CASC, CASIC, CALT, commercial Chinese providers |
+| **Europe** | Arianespace, ESA member states |
+| **Japan** | JAXA, MHI |
+| **India** | ISRO |
+| **Other** | All remaining |
+
+---
+
+## Development
+
+```bash
+npm install
+npm run dev       # localhost:5173
+npm run build     # production build → dist/
+npm run preview   # preview production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Deployment
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+# First time
+vercel
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+# Subsequent
+vercel --prod
 ```
+
+Set the Vercel project name to `launch-atlas` and link as a subdomain:  
+`launch-atlas.vercel.app` → link from Apogee nav as `Launch Atlas ↗`
+
+---
+
+## Connecting to Apogee
+
+Add to Apogee's nav (`/src/components/Nav.tsx`):
+
+```tsx
+<a
+  href="https://launch-atlas.vercel.app"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Launch Atlas ↗
+</a>
+```
+
+The shared IBM Plex type system and token naming makes both sites read as the same brand.
+
+---
+
+*Built as part of the Apogee brand extension — same organization, different energy.*
