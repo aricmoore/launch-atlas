@@ -38,11 +38,9 @@ const COUNTRY_MAP: Record<string, CountryKey> = {
 
 function classifyLaunch(launch: LLLaunch): CountryKey {
   const providerName = launch.launch_service_provider?.name ?? ''
-  const countryCode = (
-    launch.launch_service_provider?.country_code
-    || launch.rocket?.configuration?.manufacturer?.country_code
-    || ''
-  )
+  const countryCode = launch.launch_service_provider?.country_code
+    ?? launch.rocket?.configuration?.manufacturer?.country_code
+    ?? ''
 
   // SpaceX bucket — reuse revolution story
   if (providerName.toLowerCase().includes('spacex')) return 'SpaceX'
