@@ -93,7 +93,7 @@ body {
   font-size: var(--text-base);
   color: var(--color-text-primary);
   background-color: var(--color-bg);
-  background: radial-gradient(ellipse at 50% 0%, #1a1a24 0%, #0d0d10 40%, #09090b 100%);
+  background: radial-gradient(ellipse at 50% 20%, #111116 0%, #09090b 60%);
   line-height: 1.5;
   min-height: 100vh;
 }
