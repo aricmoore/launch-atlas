@@ -6,7 +6,7 @@ import { DetailPage } from '@/pages/DetailPage'
 
 export default function App() {
   return (
-    <BrowserRouter basename="/la">
+    <BrowserRouter>
       <Nav />
       <Routes>
         <Route path="/" element={<RacePage />} />
